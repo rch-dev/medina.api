@@ -1,4 +1,5 @@
 ﻿using Nancy;
+using Newtonsoft.Json;
 
 namespace Medina.Api.Modules
 {
@@ -16,6 +17,12 @@ namespace Medina.Api.Modules
             Get["/"] = parameters =>
             {
                 return "handshake successful";
+            };
+
+            Get["/parse"] = parameters =>
+            {
+                //Do the logic.
+                return JsonConvert.SerializeObject(Medina.LoadSite());
             };
         }
     }

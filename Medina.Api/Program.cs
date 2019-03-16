@@ -35,7 +35,7 @@ namespace Medina.Api
 
         public void Start()
         {
-            Startup.LaunchInProcess(Startup.LoadMode.Headless, 0);
+            Startup.LaunchInProcess(Startup.LoadMode.FullUserInterface, 0);
             Console.WriteLine("Rhino loaded at port 1001.");
             m_nancyHost = new NancyHost(new Uri("http://localhost:1001"));
             m_nancyHost.Start();
