@@ -22,7 +22,8 @@ namespace Medina.Api.Modules
             Get["/parse"] = parameters =>
             {
                 //Do the logic.
-                return JsonConvert.SerializeObject(Medina.LoadSite());
+
+                return JsonConvert.SerializeObject(Medina.Initialize());
             };
         }
     }

@@ -93,7 +93,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\MedinaSiteSectorBuilder.cs" />
     <Compile Include="Medina.cs" />
+    <Compile Include="Models\MedinaMotif.cs" />
+    <Compile Include="Models\MedinaSite.cs" />
+    <Compile Include="Models\MedinaSiteSector.cs" />
+    <Compile Include="Models\MedinaSiteSectorId.cs" />
     <Compile Include="Modules\Intent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,9 +113,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
