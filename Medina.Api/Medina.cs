@@ -114,7 +114,7 @@ namespace Medina.Api
                 }
                 else if (param.NickName != null || param.NickName.Length > 1)
                 {
-                    Console.WriteLine($"Param {param.NickName} skipped. ({param.SourceCount.ToString()} sources / {param.Recipients.Count} recipients)");
+                    //Console.WriteLine($"Param {param.NickName} skipped. ({param.SourceCount.ToString()} sources / {param.Recipients.Count} recipients)");
                 }
             }         
 
