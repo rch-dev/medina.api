@@ -87,9 +87,12 @@ namespace Medina.Api
 
         public static MedinaMotif LoadMotif(string path, string name)
         {
-            var ghxText = System.IO.File.ReadAllText(path);
+            var builder = new MedinaMotifBuilder();
 
-            var motif = new MedinaMotif(name, ghxText);
+            var motif = builder.CreateMotif(name)
+                .FromGhx(path)
+                .FindInputs()
+                .FindOutputs();
 
             return motif;
         }
