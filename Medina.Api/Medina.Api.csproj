@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Medina.Api</RootNamespace>
     <AssemblyName>Medina.Api</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
@@ -23,6 +23,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,13 +45,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Eto, Version=2.5.0.0, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
-      <HintPath>..\packages\RhinoCommon.6.13.19058.371\lib\net45\Eto.dll</HintPath>
+      <HintPath>..\packages\RhinoCommon.7.0.19050.13065-wip\lib\net45\Eto.dll</HintPath>
     </Reference>
-    <Reference Include="GH_IO, Version=6.13.19058.370, Culture=neutral, PublicKeyToken=6a29997d2e6b4f97, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grasshopper.6.13.19058.371\lib\net45\GH_IO.dll</HintPath>
+    <Reference Include="Eto.Serialization.Xaml">
+      <HintPath>..\..\..\..\..\Program Files\Rhino WIP\System\Eto.Serialization.Xaml.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="Grasshopper, Version=6.13.19058.370, Culture=neutral, PublicKeyToken=dda4f5ec2cd80803, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grasshopper.6.13.19058.371\lib\net45\Grasshopper.dll</HintPath>
+    <Reference Include="Eto.Wpf">
+      <HintPath>..\..\..\..\..\Program Files\Rhino WIP\System\Eto.Wpf.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="GH_IO, Version=7.0.19050.13060, Culture=neutral, PublicKeyToken=6a29997d2e6b4f97, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grasshopper.7.0.19050.13065-wip\lib\net45\GH_IO.dll</HintPath>
+    </Reference>
+    <Reference Include="GH_Util">
+      <HintPath>..\..\..\..\..\Program Files\Rhino WIP\Plug-ins\Grasshopper\GH_Util.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Grasshopper, Version=7.0.19050.13060, Culture=neutral, PublicKeyToken=dda4f5ec2cd80803, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grasshopper.7.0.19050.13065-wip\lib\net45\Grasshopper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Nancy, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
@@ -62,11 +75,15 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Rhino.UI, Version=6.13.19058.370, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
-      <HintPath>..\packages\RhinoCommon.6.13.19058.371\lib\net45\Rhino.UI.dll</HintPath>
+    <Reference Include="Rhino.UI, Version=7.0.19050.13060, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
+      <HintPath>..\packages\RhinoCommon.7.0.19050.13065-wip\lib\net45\Rhino.UI.dll</HintPath>
     </Reference>
-    <Reference Include="RhinoCommon, Version=6.13.19058.370, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
-      <HintPath>..\packages\RhinoCommon.6.13.19058.371\lib\net45\RhinoCommon.dll</HintPath>
+    <Reference Include="RhinoCommon, Version=7.0.19050.13060, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
+      <HintPath>..\packages\RhinoCommon.7.0.19050.13065-wip\lib\net45\RhinoCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="RhinoWindows">
+      <HintPath>..\..\..\..\..\Program Files\Rhino WIP\System\RhinoWindows.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.ServiceProcess" />
@@ -111,6 +128,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.config" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -176,11 +194,11 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\RhinoCommon.6.13.19058.371\build\net45\RhinoCommon.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\RhinoCommon.6.13.19058.371\build\net45\RhinoCommon.targets'))" />
-    <Error Condition="!Exists('..\packages\Grasshopper.6.13.19058.371\build\net45\Grasshopper.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grasshopper.6.13.19058.371\build\net45\Grasshopper.targets'))" />
+    <Error Condition="!Exists('..\packages\RhinoCommon.7.0.19050.13065-wip\build\net45\RhinoCommon.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\RhinoCommon.7.0.19050.13065-wip\build\net45\RhinoCommon.targets'))" />
+    <Error Condition="!Exists('..\packages\Grasshopper.7.0.19050.13065-wip\build\net45\Grasshopper.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grasshopper.7.0.19050.13065-wip\build\net45\Grasshopper.targets'))" />
   </Target>
-  <Import Project="..\packages\RhinoCommon.6.13.19058.371\build\net45\RhinoCommon.targets" Condition="Exists('..\packages\RhinoCommon.6.13.19058.371\build\net45\RhinoCommon.targets')" />
-  <Import Project="..\packages\Grasshopper.6.13.19058.371\build\net45\Grasshopper.targets" Condition="Exists('..\packages\Grasshopper.6.13.19058.371\build\net45\Grasshopper.targets')" />
+  <Import Project="..\packages\RhinoCommon.7.0.19050.13065-wip\build\net45\RhinoCommon.targets" Condition="Exists('..\packages\RhinoCommon.7.0.19050.13065-wip\build\net45\RhinoCommon.targets')" />
+  <Import Project="..\packages\Grasshopper.7.0.19050.13065-wip\build\net45\Grasshopper.targets" Condition="Exists('..\packages\Grasshopper.7.0.19050.13065-wip\build\net45\Grasshopper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

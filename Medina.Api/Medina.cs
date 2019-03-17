@@ -28,7 +28,7 @@ namespace Medina.Api
             return site;
         }
 
-        private static List<MedinaSiteSector> LoadSite(string path)
+        public static List<MedinaSiteSector> LoadSite(string path)
         {
             var file = File3dm.Read(path);
 
@@ -74,11 +74,19 @@ namespace Medina.Api
             return sectors;
         }
 
-        public static List<MedinaMotif> LoadMotifs()
+        /// <summary>
+        /// Grasshopper component name => Rhino layer
+        /// </summary>
+        private static Dictionary<string, string> InputTranslations { get; } = new Dictionary<string, string>()
+        {
+            { "" , "" }
+        };
+
+        public static List<MedinaMotif> LoadMotifs(string path)
         {
             var archive = new GH_Archive();
 
-            var ghxText = System.IO.File.ReadAllText(@"G:\My Drive\medina\motifs\Dome_Construct.ghx");
+            var ghxText = System.IO.File.ReadAllText(path);
 
             try
             {
@@ -103,6 +111,10 @@ namespace Medina.Api
                 if (param.Sources.Count == 0 && param.Recipients.Count != 0)
                 {
                     Console.WriteLine($"Primary input named {param.NickName} discovered!");
+                }
+                else if (param.NickName != null || param.NickName.Length > 1)
+                {
+                    Console.WriteLine($"Param {param.NickName} skipped. ({param.SourceCount.ToString()} sources / {param.Recipients.Count} recipients)");
                 }
             }         
 
