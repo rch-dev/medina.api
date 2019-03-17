@@ -30,6 +30,11 @@ namespace Medina.Api.Modules
                 return "handshake successful";
             };
 
+            Get["/init"] = parameters =>
+            {
+                return JsonConvert.SerializeObject(Medina.Initialize());
+            };
+
             Get["/init/site"] = parameters =>
             {
                 //Do the logic.

@@ -14,13 +14,27 @@ namespace Medina.Api
 {
     public static class Medina
     {
-        public static MedinaSite Initialize()
+        public static string Initialize()
         {
             var site = new MedinaSite();
 
             site.Sectors = LoadSite(@"G:\My Drive\medina\protocol_site_v0.5.0.3dm");
 
-            return site;
+            site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\Arc_Construct.ghx", "arch"));
+            site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\Dome_Construct.ghx", "dome"));
+            site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\Fountain_Construct.ghx", "fountain"));
+
+            foreach (var sector in site.Sectors)
+            {
+                sector.Audit();
+            }
+
+            foreach (var motif in site.Motifs)
+            {
+                motif.Audit();
+            }
+
+            return "ok";
         }
 
         public static List<MedinaSiteSector> LoadSite(string path)
@@ -68,21 +82,17 @@ namespace Medina.Api
                 sectors.Add(sector);
             }
 
-            foreach (var sector in sectors)
-            {
-                sector.Audit();
-            }
-
             return sectors;
         }
 
-        /// <summary>
-        /// Grasshopper component name => Rhino layer
-        /// </summary>
-        private static Dictionary<string, string> InputTranslations { get; } = new Dictionary<string, string>()
+        public static MedinaMotif LoadMotif(string path, string name)
         {
-            { "" , "" }
-        };
+            var ghxText = System.IO.File.ReadAllText(path);
+
+            var motif = new MedinaMotif(name, ghxText);
+
+            return motif;
+        }
 
         public static List<MedinaMotif> LoadMotifs(string path)
         {

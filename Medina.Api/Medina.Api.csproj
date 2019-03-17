@@ -103,6 +103,8 @@
     <Compile Include="Builders\MedinaSiteSectorBuilder.cs" />
     <Compile Include="Medina.cs" />
     <Compile Include="Models\MedinaMotif.cs" />
+    <Compile Include="Models\MedinaMotifInput.cs" />
+    <Compile Include="Models\MedinaMotifOutput.cs" />
     <Compile Include="Models\MedinaSite.cs" />
     <Compile Include="Models\MedinaSiteSector.cs" />
     <Compile Include="Models\MedinaSiteSectorId.cs" />

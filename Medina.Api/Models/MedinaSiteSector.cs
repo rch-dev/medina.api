@@ -74,16 +74,16 @@ namespace Medina.Api
             Console.WriteLine(this.ToString());
 
             Console.WriteLine($"   Sector base is {(Base == null ? "unset" : "set")}.");
-            Console.WriteLine($"   {Footprints.Count.ToString()} footprints.");
-            Console.WriteLine($"   {Courtyards.Count.ToString()} courtyards.");
-            Console.WriteLine($"   {Plazas.Count.ToString()} plazas.");
-            Console.WriteLine($"   {Floors.Count.ToString()} floors.");
-            Console.WriteLine($"   {Roofs.Count.ToString()} roofs.");
-            Console.WriteLine($"   {Balconies.Count.ToString()} balconies.");
-            Console.WriteLine($"   {Massing.Count.ToString()} building masses.");
-            Console.WriteLine($"   {Doors.Count.ToString()} doors.");
-            Console.WriteLine($"   {Windows.Count.ToString()} windows.");
-            Console.WriteLine($"   ...and {RuinPoints.Count.ToString()} ruin points.");
+            Console.WriteLine($"   {Footprints.Count.ToString()} footprints");
+            Console.WriteLine($"   {Courtyards.Count.ToString()} courtyards");
+            Console.WriteLine($"   {Plazas.Count.ToString()} plazas");
+            Console.WriteLine($"   {Floors.Count.ToString()} floors");
+            Console.WriteLine($"   {Roofs.Count.ToString()} roofs");
+            Console.WriteLine($"   {Balconies.Count.ToString()} balconies");
+            Console.WriteLine($"   {Massing.Count.ToString()} building masses");
+            Console.WriteLine($"   {Doors.Count.ToString()} doors");
+            Console.WriteLine($"   {Windows.Count.ToString()} windows");
+            Console.WriteLine($"   ...and {RuinPoints.Count.ToString()} ruin points");
         }
 
         public override string ToString()
