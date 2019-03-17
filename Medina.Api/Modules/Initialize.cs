@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 
 namespace Medina.Api.Modules
 {
-    public class Intent : NancyModule
+    public class Initialize : NancyModule
     {
-        public Intent()
+        public Initialize()
         {
             After.AddItemToEndOfPipeline((ctx) =>
             {
@@ -19,11 +19,18 @@ namespace Medina.Api.Modules
                 return "handshake successful";
             };
 
-            Get["/parse"] = parameters =>
+            Get["/init/site"] = parameters =>
             {
                 //Do the logic.
 
                 return JsonConvert.SerializeObject(Medina.Initialize());
+            };
+
+            Get["/init/motifs"] = parameters =>
+            {
+                //Please work I beg you
+
+                return JsonConvert.SerializeObject(Medina.LoadMotifs());
             };
         }
     }

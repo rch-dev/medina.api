@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using Grasshopper;
+using Grasshopper.Kernel;
+using Grasshopper.Kernel.Data;
+using Grasshopper.Kernel.Types;
+using Grasshopper.Kernel.Parameters;
+using Grasshopper.Kernel.Special;
+using GH_IO.Serialization;
 using Rhino.FileIO;
 
 namespace Medina.Api
@@ -66,6 +72,41 @@ namespace Medina.Api
             }
 
             return sectors;
+        }
+
+        public static List<MedinaMotif> LoadMotifs()
+        {
+            var archive = new GH_Archive();
+
+            var ghxText = System.IO.File.ReadAllText(@"G:\My Drive\medina\motifs\Dome_Construct.ghx");
+
+            try
+            {
+                archive.Deserialize_Xml(ghxText);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            var definition = new GH_Document();
+
+            archive.ExtractObject(definition, "Definition");
+
+            Console.WriteLine($"{definition.ObjectCount.ToString()} objects in loaded definition.");
+
+            foreach (var obj in definition.Objects)
+            {
+                var param = obj as IGH_Param;
+                if (param == null) continue;
+
+                if (param.Sources.Count == 0 && param.Recipients.Count != 0)
+                {
+                    Console.WriteLine($"Primary input named {param.NickName} discovered!");
+                }
+            }         
+
+            return null;
         }
     }
 }
