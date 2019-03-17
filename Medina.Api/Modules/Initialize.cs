@@ -41,7 +41,7 @@ namespace Medina.Api.Modules
             {
                 //Please work I beg you
 
-                return JsonConvert.SerializeObject(Medina.LoadMotifs(@"G:\My Drive\medina\motifs\Dome_Construct.ghx"));
+                return JsonConvert.SerializeObject(Medina.LoadMotifs(@"G:\My Drive\medina\motifs\Arc_Construct.ghx"));
             };           
         }
     }

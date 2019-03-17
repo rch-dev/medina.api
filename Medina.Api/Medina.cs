@@ -20,11 +20,6 @@ namespace Medina.Api
 
             site.Sectors = LoadSite(@"G:\My Drive\medina\protocol_site_v0.5.0.3dm");
 
-            foreach (var sector in site.Sectors)
-            {
-                Console.WriteLine($"Loaded {sector.ToString()}");
-            }
-
             return site;
         }
 
@@ -65,10 +60,17 @@ namespace Medina.Api
             {
                 var builder = new MedinaSiteSectorBuilder();
 
-                var sector = builder.CreateSector(key)
-                    .WithObjects(objectDictionary[key]);
+                var sector = builder.CreateSector(file)
+                    .WithId(key)
+                    .WithObjects(objectDictionary[key])
+                    .CategorizeObjects();
 
                 sectors.Add(sector);
+            }
+
+            foreach (var sector in sectors)
+            {
+                sector.Audit();
             }
 
             return sectors;
@@ -108,7 +110,7 @@ namespace Medina.Api
                 var param = obj as IGH_Param;
                 if (param == null) continue;
 
-                if (param.Sources.Count == 0 && param.Recipients.Count != 0)
+                if (param.Sources.Count == 0 && param.Recipients.Count != 0 && param.NickName.Length > 1)
                 {
                     Console.WriteLine($"Primary input named {param.NickName} discovered!");
                 }

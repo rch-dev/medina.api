@@ -35,7 +35,7 @@ namespace Medina.Api
                 x.RunAsPrompt();
                 x.SetDescription("medina protocol");
                 x.SetDisplayName("medina api");
-                x.SetServiceName("rch.dev.medina");
+                x.SetServiceName("medina protocol");
             });
 
             Startup.ExitInProcess();
