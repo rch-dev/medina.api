@@ -136,6 +136,8 @@ namespace Medina.Api
                         break;
                 }
             }
+
+            Console.WriteLine($"Sector {sector.Id.ToString()} staged for motif ({Name})");
         }
 
         public List<Brep> SolveAt(Point3d point)
@@ -150,12 +152,26 @@ namespace Medina.Api
 
             //Console.WriteLine("Solving...");
 
-            Output.CollectData();
-            Output.ComputeData();
+            //Console.WriteLine($"Solving for param {Output.NickName}...");
 
-            //Console.WriteLine($"Solve successful. {Output.VolatileDataCount.ToString()} objects created.");
+            try
+            {
+                Output.Phase = GH_SolutionPhase.Blank;
+                GhDoc.NewSolution(false);
+                Output.CollectData();
+                Output.ComputeData();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            //Console.WriteLine($"Solve finished with {Output.VolatileDataCount.ToString()} objects created.");
 
             var result = new List<Brep>();
+
+            Console.WriteLine(Output.VolatileDataCount.ToString());
+            Output.Sources.ToList().ForEach(x => Console.WriteLine(x.Name));
 
             for (int i = 0; i < Output.VolatileData.PathCount; i++)
             {

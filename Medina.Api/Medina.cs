@@ -22,8 +22,8 @@ namespace Medina.Api
 
             site.Sectors = LoadSite(@"G:\My Drive\medina\protocol_site_v0.5.0.3dm");
 
-            site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\boxtest.ghx", "test"));
-            //site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\Arc_Construct.ghx", "arch"));
+            //site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\boxtest.ghx", "test"));
+            site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\Arc_Construct.ghx", "arch"));
             //site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\Dome_Construct.ghx", "dome"));
             //site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\Fountain_Construct.ghx", "fountain"));
 
@@ -37,17 +37,19 @@ namespace Medina.Api
                 motif.Audit();
             }
 
-            site.Motifs[0].StageSector(site.Sectors[0]);
+            var sectorG13 = site.Sectors.First(x => x.Id.ToString() == "G13");
 
-            //var pts = site.Sectors[0].Base.GetBoundingBox(false).PopulateBoundingBox(10);
-            //
-            //var anchors = pts.Select(x => new Point3d(x.X, x.Y, 0)).ToList();
-            //var atts = new Rh.DocObjects.ObjectAttributes()
-            //{
-            //    LayerIndex = 0,
-            //};
+            site.Motifs[0].StageSector(sectorG13);
 
-            var anchors = new List<Point3d>()
+            var pts = sectorG13.Base.GetBoundingBox(false).PopulateBoundingBox(25);
+            
+            var anchors = pts.Select(x => new Point3d(x.X, x.Y, 0)).ToList();
+            var atts = new Rh.DocObjects.ObjectAttributes()
+            {
+                LayerIndex = 0,
+            };
+
+            anchors = new List<Point3d>()
             {
                 new Point3d(-280, 143, 0),
                 new Point3d(-280, 110, 0)
