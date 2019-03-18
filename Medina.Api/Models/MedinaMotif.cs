@@ -44,7 +44,98 @@ namespace Medina.Api
 
         public void StageSector(MedinaSiteSector sector)
         {
-            throw new NotImplementedException();
+            foreach (var input in Inputs)
+            {
+                var name = input.NickName;
+
+                var path = new GH_Path(0);
+
+                switch (name)
+                {
+                    case "BUILDING_MASS":               
+                        for (int i = 0; i < sector.Massing.Count; i++)
+                        {
+                            var data = new GH_Brep(sector.Massing[i]);
+                            input.AddVolatileData(path, i, data);
+                        }
+                        Console.WriteLine($"Param {name} staged successfully with {input.VolatileDataCount.ToString()} items.");
+                        break;
+                    case "FOOTPRINTS":
+                        for (int i = 0; i < sector.Footprints.Count; i++)
+                        {
+                            var data = new GH_Brep(sector.Footprints[i]);
+                            input.AddVolatileData(path, i, data);
+                        }
+                        Console.WriteLine($"Param {name} staged successfully with {input.VolatileDataCount.ToString()} items.");
+                        break;
+                    case "SLAB_DATUMS":
+                        for (int i = 0; i < sector.Floors.Count; i++)
+                        {
+                            var data = new GH_Brep(sector.Floors[i]);
+                            input.AddVolatileData(path, i, data);
+                        }
+                        Console.WriteLine($"Param {name} staged successfully with {input.VolatileDataCount.ToString()} items.");
+                        break;
+                    case "ROOF_DATUMS":
+                        for (int i = 0; i < sector.Roofs.Count; i++)
+                        {
+                            var data = new GH_Brep(sector.Roofs[i]);
+                            input.AddVolatileData(path, i, data);
+                        }
+                        Console.WriteLine($"Param {name} staged successfully with {input.VolatileDataCount.ToString()} items.");
+                        break;
+                    case "COURT_DATUMS":
+                        for (int i = 0; i < sector.Courtyards.Count; i++)
+                        {
+                            var data = new GH_Brep(sector.Courtyards[i]);
+                            input.AddVolatileData(path, i, data);
+                        }
+                        Console.WriteLine($"Param {name} staged successfully with {input.VolatileDataCount.ToString()} items.");
+                        break;
+                    case "PLAZA_DATUMS":
+                        for (int i = 0; i < sector.Plazas.Count; i++)
+                        {
+                            var data = new GH_Brep(sector.Plazas[i]);
+                            input.AddVolatileData(path, i, data);
+                        }
+                        Console.WriteLine($"Param {name} staged successfully with {input.VolatileDataCount.ToString()} items.");
+                        break;
+                    case "BALCONY_DATUMS":
+                        for (int i = 0; i < sector.Balconies.Count; i++)
+                        {
+                            var data = new GH_Brep(sector.Balconies[i]);
+                            input.AddVolatileData(path, i, data);
+                        }
+                        Console.WriteLine($"Param {name} staged successfully with {input.VolatileDataCount.ToString()} items.");
+                        break;
+                    case "DOORS":
+                        for (int i = 0; i < sector.Doors.Count; i++)
+                        {
+                            var data = new GH_Brep(sector.Doors[i]);
+                            input.AddVolatileData(path, i, data);
+                        }
+                        Console.WriteLine($"Param {name} staged successfully with {input.VolatileDataCount.ToString()} items.");
+                        break;
+                    case "WINDOWS":
+                        for (int i = 0; i < sector.Windows.Count; i++)
+                        {
+                            var data = new GH_Brep(sector.Windows[i]);
+                            input.AddVolatileData(path, i, data);
+                        }
+                        Console.WriteLine($"Param {name} staged successfully with {input.VolatileDataCount.ToString()} items.");
+                        break;
+                    case "RUINS_POINTS":
+                        for (int i = 0; i < sector.RuinPoints.Count; i++)
+                        {
+                            var data = new GH_Point(sector.RuinPoints[i]);
+                            input.AddVolatileData(path, i, data);
+                        }
+                        Console.WriteLine($"Param {name} staged successfully with {input.VolatileDataCount.ToString()} items.");
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         public List<Brep> SolveAt(Point3d point)

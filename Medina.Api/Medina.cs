@@ -34,6 +34,8 @@ namespace Medina.Api
                 motif.Audit();
             }
 
+            site.Motifs[0].StageSector(site.Sectors[0]);
+
             return "ok";
         }
 
