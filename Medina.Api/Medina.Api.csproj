@@ -102,6 +102,7 @@
   <ItemGroup>
     <Compile Include="Builders\MedinaMotifBuilder.cs" />
     <Compile Include="Builders\MedinaSiteSectorBuilder.cs" />
+    <Compile Include="Extensions\PopulateBoundingBox.cs" />
     <Compile Include="Medina.cs" />
     <Compile Include="Models\MedinaMotif.cs" />
     <Compile Include="Models\MedinaMotifInput.cs" />

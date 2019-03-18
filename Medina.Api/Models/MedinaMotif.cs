@@ -140,7 +140,40 @@ namespace Medina.Api
 
         public List<Brep> SolveAt(Point3d point)
         {
-            throw new NotImplementedException();
+            var inputParam = Inputs.First(x => x.NickName == "INPUT_POINTS");
+
+            var path = new GH_Path(0);
+            var data = new GH_Point(point);
+            inputParam.AddVolatileData(path, 0, data);
+
+            //Console.WriteLine($"Param {inputParam.NickName} staged successfully with {inputParam.VolatileDataCount.ToString()} items.");
+
+            //Console.WriteLine("Solving...");
+
+            Output.CollectData();
+            Output.ComputeData();
+
+            //Console.WriteLine($"Solve successful. {Output.VolatileDataCount.ToString()} objects created.");
+
+            var result = new List<Brep>();
+
+            for (int i = 0; i < Output.VolatileData.PathCount; i++)
+            {
+                var dat = Output.VolatileData.get_Branch(i);
+
+                var ghVal = dat as GH_Brep;
+
+                foreach (var geo in dat)
+                {
+                    var brep = geo as GH_Brep;
+                    if (geo != null)
+                    {
+                        result.Add(brep.Value);
+                    }
+                }
+            }
+
+            return result;
         }
         
         public override string ToString()

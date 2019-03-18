@@ -8,7 +8,9 @@ using Grasshopper.Kernel.Types;
 using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Special;
 using GH_IO.Serialization;
+using Rh = Rhino;
 using Rhino.FileIO;
+using Rhino.Geometry;
 
 namespace Medina.Api
 {
@@ -20,9 +22,10 @@ namespace Medina.Api
 
             site.Sectors = LoadSite(@"G:\My Drive\medina\protocol_site_v0.5.0.3dm");
 
-            site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\Arc_Construct.ghx", "arch"));
-            site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\Dome_Construct.ghx", "dome"));
-            site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\Fountain_Construct.ghx", "fountain"));
+            site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\boxtest.ghx", "test"));
+            //site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\Arc_Construct.ghx", "arch"));
+            //site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\Dome_Construct.ghx", "dome"));
+            //site.Motifs.Add(LoadMotif(@"G:\My Drive\medina\motifs\Fountain_Construct.ghx", "fountain"));
 
             foreach (var sector in site.Sectors)
             {
@@ -36,6 +39,28 @@ namespace Medina.Api
 
             site.Motifs[0].StageSector(site.Sectors[0]);
 
+            //var pts = site.Sectors[0].Base.GetBoundingBox(false).PopulateBoundingBox(10);
+            //
+            //var anchors = pts.Select(x => new Point3d(x.X, x.Y, 0)).ToList();
+            //var atts = new Rh.DocObjects.ObjectAttributes()
+            //{
+            //    LayerIndex = 0,
+            //};
+
+            var anchors = new List<Point3d>()
+            {
+                new Point3d(-280, 143, 0),
+                new Point3d(-280, 110, 0)
+            };
+
+            for (int i = 0; i < anchors.Count; i++)
+            {
+                site.Sectors[0].File.Objects.AddPoint(anchors[i]);
+                var res = site.Motifs[0].SolveAt(anchors[i]);
+
+                Console.WriteLine($"[{(i + 1).ToString().PadLeft(3, '0')}/{anchors.Count.ToString().PadLeft(3, '0')}] [{anchors[i].ToString()}] Solution with {res.Count.ToString()} objects.");
+            };
+            
             return "ok";
         }
 
